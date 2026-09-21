@@ -1,0 +1,66 @@
+{
+  "topics": [
+    {
+      "id": "hadis",
+      "title": "Hadis",
+      "eyebrow": "Hafalan harian",
+      "description": "20 hadis pendek untuk dibaca dan dihafal bersama.",
+      "icon": "✦",
+      "tone": "peach",
+      "items": [
+        { "id": "hadis-01", "number": 1, "title": "Sebaik-Baik Amalan", "arabic": "إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ", "translation": "Sesungguhnya amalan itu dinilai dengan niat.", "image": "assets/images/hadis/hadis01.webp" },
+        { "id": "hadis-02", "number": 2, "title": "Islam, Iman dan Ihsan", "arabic": "أَنْ تَعْبُدَ اللَّهَ كَأَنَّكَ تَرَاهُ", "translation": "Beribadahlah kepada Allah seolah-olah kamu melihat-Nya.", "image": "assets/images/hadis/hadis02.webp" },
+        { "id": "hadis-03", "number": 3, "title": "Lima Rukun Islam", "arabic": "بُنِيَ الإِسْلَامُ عَلَى خَمْسٍ", "translation": "Islam dibina atas lima perkara.", "image": "assets/images/hadis/hadis03.webp" },
+        { "id": "hadis-04", "number": 4, "title": "Penciptaan Manusia", "arabic": "إِنَّ أَحَدَكُمْ يُجْمَعُ خَلْقُهُ", "translation": "Setiap manusia diciptakan dengan ketetapan Allah.", "image": "assets/images/hadis/hadis04.webp" },
+        { "id": "hadis-05", "number": 5, "title": "Menolak Kemungkaran", "arabic": "مَنْ أَحْدَثَ فِي أَمْرِنَا هَذَا", "translation": "Sesiapa mengada-adakan perkara dalam urusan kami, maka ia tertolak.", "image": "assets/images/hadis/hadis05.webp" },
+        { "id": "hadis-06", "number": 6, "title": "Halal dan Haram", "arabic": "إِنَّ الْحَلَالَ بَيِّنٌ وَإِنَّ الْحَرَامَ بَيِّنٌ", "translation": "Yang halal itu jelas dan yang haram itu jelas.", "image": "assets/images/hadis/hadis06.webp" },
+        { "id": "hadis-07", "number": 7, "title": "Agama Itu Nasihat", "arabic": "الدِّينُ النَّصِيحَةُ", "translation": "Agama itu nasihat.", "image": "assets/images/hadis/hadis07.webp" },
+        { "id": "hadis-08", "number": 8, "title": "Menjaga Solat", "arabic": "أُمِرْتُ أَنْ أُقَاتِلَ النَّاسَ", "translation": "Aku diperintahkan untuk menjaga syahadah dan solat.", "image": "assets/images/hadis/hadis08.webp" },
+        { "id": "hadis-09", "number": 9, "title": "Ikut Kemampuan", "arabic": "فَإِذَا نَهَيْتُكُمْ عَنْ شَيْءٍ فَاجْتَنِبُوهُ", "translation": "Apabila aku melarang sesuatu, jauhilah ia.", "image": "assets/images/hadis/hadis09.webp" },
+        { "id": "hadis-10", "number": 10, "title": "Rezeki Yang Baik", "arabic": "إِنَّ اللَّهَ طَيِّبٌ لَا يَقْبَلُ إِلَّا طَيِّبًا", "translation": "Allah itu baik dan hanya menerima yang baik.", "image": "assets/images/hadis/hadis10.webp" },
+        { "id": "hadis-11", "number": 11, "title": "Tinggalkan Keraguan", "arabic": "دَعْ مَا يَرِيبُكَ إِلَى مَا لَا يَرِيبُكَ", "translation": "Tinggalkan perkara yang meragukanmu.", "image": "assets/images/hadis/hadis11.webp" },
+        { "id": "hadis-12", "number": 12, "title": "Tinggalkan Yang Tidak Berguna", "arabic": "مِنْ حُسْنِ إِسْلَامِ الْمَرْءِ", "translation": "Antara keelokan Islam seseorang ialah meninggalkan perkara yang tidak berguna.", "image": "assets/images/hadis/hadis12.webp" },
+        { "id": "hadis-13", "number": 13, "title": "Kasihi Saudara", "arabic": "لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لِأَخِيهِ", "translation": "Tidak sempurna iman sehingga dia mengasihi saudaranya.", "image": "assets/images/hadis/hadis13.webp" },
+        { "id": "hadis-14", "number": 14, "title": "Menjaga Nyawa", "arabic": "لَا يَحِلُّ دَمُ امْرِئٍ مُسْلِمٍ", "translation": "Tidak halal darah seorang Muslim kecuali dengan haknya.", "image": "assets/images/hadis/hadis14.webp" },
+        { "id": "hadis-15", "number": 15, "title": "Berkata Baik", "arabic": "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ", "translation": "Sesiapa beriman kepada Allah, hendaklah berkata baik.", "image": "assets/images/hadis/hadis15.webp" },
+        { "id": "hadis-16", "number": 16, "title": "Jangan Marah", "arabic": "لَا تَغْضَبْ", "translation": "Jangan marah.", "image": "assets/images/hadis/hadis16.webp" },
+        { "id": "hadis-17", "number": 17, "title": "Berlaku Ihsan", "arabic": "إِنَّ اللَّهَ كَتَبَ الإِحْسَانَ عَلَى كُلِّ شَيْءٍ", "translation": "Sesungguhnya Allah mewajibkan ihsan pada setiap perkara.", "image": "assets/images/hadis/hadis17.webp" },
+        { "id": "hadis-18", "number": 18, "title": "Bertakwa Di Mana Saja", "arabic": "اتَّقِ اللَّهَ حَيْثُمَا كُنْتَ", "translation": "Bertakwalah kepada Allah di mana sahaja kamu berada.", "image": "assets/images/hadis/hadis18.webp" },
+        { "id": "hadis-19", "number": 19, "title": "Jagalah Allah", "arabic": "احْفَظِ اللَّهَ يَحْفَظْكَ", "translation": "Jagalah perintah Allah, nescaya Allah menjagamu.", "image": "assets/images/hadis/hadis19.webp" },
+        { "id": "hadis-20", "number": 20, "title": "Malu Itu Sebahagian Iman", "arabic": "إِذَا لَمْ تَسْتَحْيِ فَاصْنَعْ مَا شِئْتَ", "translation": "Jika kamu tidak malu, buatlah apa yang kamu mahu.", "image": "assets/images/hadis/hadis20.webp" }
+      ]
+    },
+    {
+      "id": "quran",
+      "title": "Quran",
+      "eyebrow": "Juz 30",
+      "description": "Surah pilihan untuk dibaca dan diulang bersama.",
+      "icon": "☾",
+      "tone": "sage",
+      "items": [
+        { "id": "an-nas", "number": 1, "title": "An-Nas", "arabic": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ", "translation": "Katakanlah: Aku berlindung kepada Tuhan manusia.", "accent": "#b7d8c4" },
+        { "id": "al-falaq", "number": 2, "title": "Al-Falaq", "arabic": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ", "translation": "Katakanlah: Aku berlindung kepada Tuhan waktu subuh.", "accent": "#c8d8e9" },
+        { "id": "al-ikhlas", "number": 3, "title": "Al-Ikhlas", "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ", "translation": "Katakanlah: Dialah Allah Yang Maha Esa.", "accent": "#f0d29f" },
+        { "id": "al-lahab", "number": 4, "title": "Al-Lahab", "arabic": "تَبَّتْ يَدَا أَبِي لَهَبٍ", "translation": "Binasalah kedua tangan Abu Lahab.", "accent": "#e6b4a7" }
+      ]
+    },
+    {
+      "id": "colors",
+      "title": "Warna Arab",
+      "eyebrow": "Bahasa Arab",
+      "description": "Kenali warna dalam bahasa Arab dengan suara.",
+      "icon": "●",
+      "tone": "sky",
+      "items": [
+        { "id": "ahmar", "number": 1, "title": "Merah", "arabic": "أَحْمَرُ", "transliteration": "Ahmar", "translation": "Merah", "accent": "#e17b72" },
+        { "id": "azraq", "number": 2, "title": "Biru", "arabic": "أَزْرَقُ", "transliteration": "Azraq", "translation": "Biru", "accent": "#76a9d6" },
+        { "id": "asfar", "number": 3, "title": "Kuning", "arabic": "أَصْفَرُ", "transliteration": "Asfar", "translation": "Kuning", "accent": "#f0ca62" },
+        { "id": "akhdar", "number": 4, "title": "Hijau", "arabic": "أَخْضَرُ", "transliteration": "Akhdar", "translation": "Hijau", "accent": "#82b994" },
+        { "id": "abyad", "number": 5, "title": "Putih", "arabic": "أَبْيَضُ", "transliteration": "Abyad", "translation": "Putih", "accent": "#f4f0e6" },
+        { "id": "aswad", "number": 6, "title": "Hitam", "arabic": "أَسْوَدُ", "transliteration": "Aswad", "translation": "Hitam", "accent": "#35414a" },
+        { "id": "bunni", "number": 7, "title": "Coklat", "arabic": "بُنِّيٌّ", "transliteration": "Bunni", "translation": "Coklat", "accent": "#a8795c" },
+        { "id": "wardi", "number": 8, "title": "Merah jambu", "arabic": "وَرْدِيٌّ", "transliteration": "Wardi", "translation": "Merah jambu", "accent": "#e6a0b8" }
+      ]
+    }
+  ]
+}
