@@ -76,6 +76,10 @@ function renderTopicCard(topic) {
 }
 
 function renderTopic(topic) {
+  if (topic.id === "colors") {
+    renderColorsTopic(topic, topic.items[0]);
+    return;
+  }
   app.innerHTML = `
     <a class="back-link" href="#home">← Kembali ke utama</a>
     <section class="topic-header">
@@ -87,9 +91,57 @@ function renderTopic(topic) {
     </section>`;
 }
 
+function renderColorsTopic(topic, selectedItem) {
+  app.innerHTML = `
+    <a class="back-link" href="#home">← Kembali ke utama</a>
+    <section class="topic-header">
+      <div><p class="eyebrow">${escapeHtml(topic.eyebrow)}</p><h1>${escapeHtml(topic.title)}</h1><p class="intro">${escapeHtml(topic.description)}</p></div>
+      <span class="topic-count">${topicProgress(topic)} / ${topic.items.length} sudah diulang</span>
+    </section>
+    <section class="color-detail-panel" id="color-detail" aria-live="polite"></section>
+    <section class="lesson-grid color-grid" aria-label="Senarai ${escapeHtml(topic.title)}">
+      ${topic.items.map((item) => renderLessonCard(topic, item)).join("")}
+    </section>`;
+  renderColorPanel(topic, selectedItem);
+  document.querySelectorAll(".color-grid .lesson-card").forEach((card, index) => {
+    card.href = "#colors";
+    card.addEventListener("click", (event) => {
+      event.preventDefault();
+      renderColorPanel(topic, topic.items[index]);
+      document.querySelector("#color-detail")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+}
+
+function renderColorPanel(topic, item) {
+  const done = isRevised(item.id);
+  const panel = document.querySelector("#color-detail");
+  if (!panel) return;
+  panel.innerHTML = `
+    <div class="color-panel-swatch" style="--color-accent: ${escapeHtml(item.accent)}"><div class="color-swatch"></div></div>
+    <div class="color-panel-copy">
+      <p class="eyebrow">Warna · ${String(item.number).padStart(2, "0")}</p>
+      <h2>${escapeHtml(item.title)}</h2>
+      <p class="arabic-text" lang="ar">${escapeHtml(item.arabic)}</p>
+      <p class="transliteration">${escapeHtml(item.transliteration)}</p>
+      <div class="detail-actions">
+        <button class="button" id="speak-button" type="button">◖ Dengar sebutan</button>
+        <button class="button secondary" id="revised-button" type="button" aria-pressed="${done}">${done ? "✓ Sudah diulang" : "Tanda sudah diulang"}</button>
+      </div>
+    </div>`;
+  document.querySelector("#revised-button").addEventListener("click", () => {
+    revised[item.id] = !isRevised(item.id);
+    saveProgress();
+    renderColorPanel(topic, item);
+    renderColorsTopic(topic, item);
+  });
+  document.querySelector("#speak-button").addEventListener("click", () => speakArabic(item.arabic, item.title));
+}
+
 function renderLessonCard(topic, item) {
   const done = isRevised(item.id);
-  return `<a class="lesson-card" href="#${escapeHtml(topic.id)}/${escapeHtml(item.id)}">
+  const href = topic.id === "colors" ? "#colors" : `#${escapeHtml(topic.id)}/${escapeHtml(item.id)}`;
+  return `<a class="lesson-card" href="${href}">
     <div class="lesson-number"><span>${String(item.number).padStart(2, "0")}</span>${done ? '<span class="done-mark" title="Sudah diulang">✓</span>' : ""}</div>
     <div>${item.arabic ? `<div class="arabic-mini" lang="ar">${escapeHtml(item.arabic)}</div>` : ""}<h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.translation || item.transliteration || "Tekan untuk belajar")}</p></div>
   </a>`;
@@ -167,7 +219,10 @@ function renderRoute() {
     const topic = getTopic(topicId);
     const lesson = getLesson(topic, lessonId);
     if (!topic) renderHome();
-    else if (!lessonId || !lesson) renderTopic(topic);
+    else if (topic.id === "colors") {
+      if (lessonId) history.replaceState(null, "", `${window.location.pathname}${window.location.search}#colors`);
+      renderTopic(topic);
+    } else if (!lessonId || !lesson) renderTopic(topic);
     else renderLesson(topic, lesson);
   }
   app.focus({ preventScroll: true });
