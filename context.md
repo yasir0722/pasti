@@ -103,7 +103,7 @@ Why this is the best starting point:
 
 - No server, database, authentication, or API calls.
 - No React/framework runtime or large JavaScript bundle.
-- Can be hosted free on GitHub Pages, Netlify, Cloudflare Pages, or any basic web host.
+- Can be hosted free on GitHub Pages with HTTPS and a Git-based deployment workflow.
 - Can work offline after the first visit when a small service worker is added.
 - Content and images remain private to the deployed site and are easy to update.
 
@@ -123,6 +123,31 @@ assets/
 ```
 
 One-page navigation can use URL hashes such as `#hadis`, `#hadis/hadis-01`, and `#quran/al-fatihah`. This keeps navigation fast while retaining browser back/forward support without requiring server-side routing.
+
+## GitHub Pages Deployment
+
+GitHub Pages is the official hosting target for the first release. The repository `yasir0722/pasti` should publish the static app directly from its `main` branch through GitHub Actions.
+
+Deployment requirements:
+
+- Publish the repository root or a generated `dist/` folder as static files.
+- Use a GitHub Actions workflow that runs on pushes to `main`.
+- Do not require Node.js, Python, Docker, a database, environment secrets, or a server process at runtime.
+- Keep all lesson data, images, and optional recordings inside the repository or another intentionally public static asset location.
+- Use relative asset paths so the app works both at `https://yasir0722.github.io/pasti/` and with a future custom domain.
+- Use hash navigation such as `#hadis/hadis-01`; do not depend on server-side route rewrites.
+- Include a `404.html` fallback only if the deployed app needs a friendly missing-page response.
+- Enable GitHub Pages with GitHub Actions in repository settings.
+
+The expected first URL is:
+
+```text
+https://yasir0722.github.io/pasti/
+```
+
+A custom domain can be added later with a `CNAME` file and DNS configuration, without changing the app architecture.
+
+GitHub Pages is appropriate because this app has no private runtime data or server-side behavior. Browser-only features such as `localStorage`, speech synthesis, and service-worker caching continue to work over the HTTPS Pages URL. Revision progress is stored per browser/device and is not synchronized between parents or devices until a backend is intentionally added in a future version.
 
 ## Arabic Voice Synthesis
 
@@ -175,6 +200,18 @@ Keep this deliberately lightweight:
 6. Add Arabic color voice synthesis and test it on the family's phone and tablet browsers.
 7. Add optional local recordings and offline caching after the core revision flow works.
 
+## GitHub Pages Release Checklist
+
+- Repository is `yasir0722/pasti` and the production branch is `main`.
+- GitHub Pages source is set to GitHub Actions.
+- The workflow completes successfully after every push to `main`.
+- The app opens at `/pasti/` and all CSS, JavaScript, JSON, image, and audio paths load correctly from that subpath.
+- Home, Hadis, Quran, and Colors navigation works after a refresh and through browser back/forward controls.
+- Arabic speech starts only after a user taps `Listen` and fails gracefully when no Arabic voice is installed.
+- Revision marks persist after refresh using `localStorage`.
+- The app remains usable on a phone, tablet, and desktop browser.
+- No API key, password, database, server process, or Docker container is needed for deployment.
+
 ## Information Needed Before Content Import
 
 - The original image files for all 20 Hadis, ideally in a folder available to this workspace.
@@ -192,3 +229,4 @@ Keep this deliberately lightweight:
 - A parent can mark a lesson as revised, and the local progress count updates.
 - Each Arabic color can be spoken with the device's available Arabic voice after tapping `Listen`.
 - Images stay readable, load efficiently, and do not require an internet API.
+- A push to `main` deploys the complete static app to GitHub Pages.
