@@ -59,6 +59,7 @@ button { font: inherit; }
 .parent-link { color: var(--teal-dark); font-size: 14px; font-weight: 700; }
 
 .app-shell { min-height: calc(100vh - 139px); padding: 48px 0 64px; }
+.app-shell:focus { outline: none; }
 .loading-state, .empty-state { padding: 48px 0; color: var(--muted); text-align: center; }
 .eyebrow { margin: 0 0 8px; color: var(--teal); font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
 h1, h2, h3, p { margin-top: 0; }

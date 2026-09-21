@@ -129,7 +129,7 @@ function renderLesson(topic, item) {
   lessonImage?.addEventListener("error", () => {
     const visual = lessonImage.closest(".detail-visual");
     visual.classList.remove("has-image");
-    visual.innerHTML = `<div class="visual-placeholder"><div class="large-arabic" lang="ar">${escapeHtml(item.arabic || "")}</div><p>Kad gambar akan diisi apabila bahan Hadis tersedia.</p></div>`;
+    visual.innerHTML = `<div class="visual-placeholder"><div class="large-arabic" lang="ar">${escapeHtml(item.arabic || "")}</div></div>`;
   }, { once: true });
   document.querySelector("#revised-button").addEventListener("click", () => toggleRevised(item.id, topic));
   document.querySelector("#speak-button")?.addEventListener("click", () => speakArabic(item.arabic, item.title));
