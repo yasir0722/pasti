@@ -200,15 +200,32 @@ function speakArabic(text, label) {
     return;
   }
   window.speechSynthesis.cancel();
+  const arabicVoice = getArabicVoice();
+  if (!arabicVoice) {
+    window.alert("Suara Arab belum dipasang pada peranti ini. Sila pasang Arabic voice dalam tetapan peranti.");
+    return;
+  }
   const utterance = new SpeechSynthesisUtterance(text);
-  const voices = window.speechSynthesis.getVoices();
-  utterance.voice = voices.find((voice) => voice.lang.toLowerCase() === "ar-sa") || voices.find((voice) => voice.lang.toLowerCase().startsWith("ar")) || null;
-  utterance.lang = utterance.voice?.lang || "ar-SA";
+  utterance.voice = arabicVoice;
+  utterance.lang = "ar-SA";
   utterance.rate = 0.72;
   utterance.pitch = 1;
   utterance.onstart = () => { document.querySelector("#speak-button").textContent = `◖ Mendengar ${label}`; };
   utterance.onend = () => { document.querySelector("#speak-button").textContent = "◖ Dengar sebutan"; };
+  utterance.onerror = () => { document.querySelector("#speak-button").textContent = "◖ Dengar sebutan"; };
   window.speechSynthesis.speak(utterance);
+}
+
+function getArabicVoice() {
+  const voices = window.speechSynthesis.getVoices();
+  return voices.find((voice) => voice.lang.toLowerCase() === "ar-sa")
+    || voices.find((voice) => voice.lang.toLowerCase().startsWith("ar"));
+}
+
+if ("speechSynthesis" in window) {
+  window.speechSynthesis.addEventListener("voiceschanged", () => {
+    window.speechSynthesis.getVoices();
+  });
 }
 
 function renderRoute() {
