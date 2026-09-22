@@ -47,10 +47,10 @@ function renderHome() {
         <h1>Belajar sedikit,<br />ingat lebih lama.</h1>
         <p class="intro">Ruang kecil untuk anak mengulang Hadis, Quran, dan bahasa Arab bersama ibu atau ayah.</p>
       </div>
-      <aside class="hero-note">
+      <button class="hero-note audio-card" id="home-quote-audio" type="button" aria-label="Dengar doa dan terjemahan">
         <span aria-hidden="true">رَبِّ زِدْنِي عِلْمًا</span>
         <p>Ya Tuhanku, tambahkanlah kepadaku ilmu pengetahuan.</p>
-      </aside>
+      </button>
     </section>
     <section aria-labelledby="topics-title">
       <div class="section-heading">
@@ -61,6 +61,7 @@ function renderHome() {
         ${content.topics.map(renderTopicCard).join("")}
       </div>
     </section>`;
+  document.querySelector("#home-quote-audio")?.addEventListener("click", playHomeQuote);
 }
 
 function renderTopicCard(topic) {
@@ -224,6 +225,27 @@ function speakArabic(text, label) {
   utterance.onend = () => { document.querySelector("#speak-button").textContent = "◖ Dengar sebutan"; };
   utterance.onerror = () => { document.querySelector("#speak-button").textContent = "◖ Dengar sebutan"; };
   window.speechSynthesis.speak(utterance);
+}
+
+function playHomeQuote() {
+  const button = document.querySelector("#home-quote-audio");
+  if (!button) return;
+  const files = ["assets/audio/home/dua-ilmu-ar.mp3", "assets/audio/home/dua-ilmu-ms.mp3"];
+  let index = 0;
+  const playNext = () => {
+    if (index >= files.length) {
+      button.classList.remove("is-playing");
+      return;
+    }
+    const audio = new Audio(files[index]);
+    audio.playbackRate = 0.75;
+    index += 1;
+    button.classList.add("is-playing");
+    audio.addEventListener("ended", playNext, { once: true });
+    audio.addEventListener("error", () => { button.classList.remove("is-playing"); }, { once: true });
+    audio.play().catch(() => { button.classList.remove("is-playing"); });
+  };
+  playNext();
 }
 
 function playArabic(item) {

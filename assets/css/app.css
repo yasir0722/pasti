@@ -74,6 +74,9 @@ h2 { margin-bottom: 10px; font-size: clamp(1.7rem, 4vw, 2.7rem); letter-spacing:
 
 .home-hero { display: grid; grid-template-columns: 1.2fr 0.8fr; align-items: end; gap: 32px; margin-bottom: 54px; }
 .hero-note { position: relative; padding: 28px; border: 1px solid rgba(40, 125, 120, 0.16); border-radius: 28px 28px 8px 28px; background: #e7f1e9; box-shadow: var(--shadow); }
+.hero-note.audio-card { width: 100%; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.hero-note.audio-card:hover, .hero-note.audio-card:focus-visible { border-color: rgba(40, 125, 120, 0.38); outline: 3px solid rgba(40, 125, 120, 0.18); outline-offset: 3px; }
+.hero-note.audio-card.is-playing { border-color: var(--teal); }
 .hero-note::before { position: absolute; top: -17px; right: 31px; width: 34px; height: 34px; border: 1px solid rgba(40, 125, 120, 0.14); border-radius: 50%; background: #f5d9b9; content: ""; }
 .hero-note span { display: block; margin-bottom: 12px; color: var(--teal-dark); font-family: Georgia, serif; font-size: 32px; }
 .hero-note p { margin-bottom: 0; color: #526c64; line-height: 1.6; }
