@@ -61,6 +61,44 @@
         { "id": "bunni", "number": 7, "title": "Coklat", "arabic": "بُنِّيٌّ", "transliteration": "Bunni", "translation": "Coklat", "accent": "#a8795c", "audio": "assets/audio/colors/bunni.mp3" },
         { "id": "wardi", "number": 8, "title": "Merah jambu", "arabic": "وَرْدِيٌّ", "transliteration": "Wardi", "translation": "Merah jambu", "accent": "#e6a0b8", "audio": "assets/audio/colors/wardi.mp3" }
       ]
+    },
+    {
+      "id": "family",
+      "title": "Anggota Keluarga Arab",
+      "eyebrow": "Bahasa Arab",
+      "description": "Kenali anggota keluarga dalam bahasa Arab dengan suara.",
+      "icon": "⌂",
+      "tone": "peach",
+      "items": [
+        { "id": "family-grandfather", "number": 1, "title": "Datuk", "arabic": "جَدٌّ", "transliteration": "Jaddun", "translation": "Datuk", "audio": "assets/audio/family/family-grandfather-ar.mp3", "introAudio": "assets/audio/family/family-grandfather-ms.mp3" },
+        { "id": "family-father", "number": 2, "title": "Ayah", "arabic": "أَبٌ", "transliteration": "Abun", "translation": "Ayah", "audio": "assets/audio/family/family-father-ar.mp3", "introAudio": "assets/audio/family/family-father-ms.mp3" },
+        { "id": "family-brother", "number": 3, "title": "Abang / Adik lelaki", "arabic": "أَخٌ", "transliteration": "Akhun", "translation": "Abang atau adik lelaki", "audio": "assets/audio/family/family-brother-ar.mp3", "introAudio": "assets/audio/family/family-brother-ms.mp3" },
+        { "id": "family-grandmother", "number": 4, "title": "Nenek", "arabic": "جَدَّةٌ", "transliteration": "Jaddatun", "translation": "Nenek", "audio": "assets/audio/family/family-grandmother-ar.mp3", "introAudio": "assets/audio/family/family-grandmother-ms.mp3" },
+        { "id": "family-mother", "number": 5, "title": "Ibu", "arabic": "أُمٌّ", "transliteration": "Ummun", "translation": "Ibu", "audio": "assets/audio/family/family-mother-ar.mp3", "introAudio": "assets/audio/family/family-mother-ms.mp3" },
+        { "id": "family-sister", "number": 6, "title": "Kakak / Adik perempuan", "arabic": "أُخْتٌ", "transliteration": "Ukhtun", "translation": "Kakak atau adik perempuan", "audio": "assets/audio/family/family-sister-ar.mp3", "introAudio": "assets/audio/family/family-sister-ms.mp3" }
+      ]
+    },
+    {
+      "id": "body",
+      "title": "Anggota Badan Arab",
+      "eyebrow": "Bahasa Arab",
+      "description": "Kenali anggota badan dalam bahasa Arab dengan suara.",
+      "icon": "✋",
+      "tone": "sky",
+      "items": [
+        { "id": "body-eye", "number": 1, "title": "Mata", "arabic": "عَيْنٌ", "transliteration": "Ainun", "translation": "Mata", "audio": "assets/audio/body/body-eye-ar.mp3", "introAudio": "assets/audio/body/body-eye-ms.mp3" },
+        { "id": "body-mouth", "number": 2, "title": "Mulut", "arabic": "فَمٌ", "transliteration": "Famun", "translation": "Mulut", "audio": "assets/audio/body/body-mouth-ar.mp3", "introAudio": "assets/audio/body/body-mouth-ms.mp3" },
+        { "id": "body-nose", "number": 3, "title": "Hidung", "arabic": "أَنْفٌ", "transliteration": "Anfun", "translation": "Hidung", "audio": "assets/audio/body/body-nose-ar.mp3", "introAudio": "assets/audio/body/body-nose-ms.mp3" },
+        { "id": "body-hair", "number": 4, "title": "Rambut", "arabic": "شَعْرٌ", "transliteration": "Sya'run", "translation": "Rambut", "audio": "assets/audio/body/body-hair-ar.mp3", "introAudio": "assets/audio/body/body-hair-ms.mp3" },
+        { "id": "body-leg", "number": 5, "title": "Kaki", "arabic": "رِجْلٌ", "transliteration": "Rijlun", "translation": "Kaki", "audio": "assets/audio/body/body-leg-ar.mp3", "introAudio": "assets/audio/body/body-leg-ms.mp3" },
+        { "id": "body-ear", "number": 6, "title": "Telinga", "arabic": "أُذُنٌ", "transliteration": "Udhunun", "translation": "Telinga", "audio": "assets/audio/body/body-ear-ar.mp3", "introAudio": "assets/audio/body/body-ear-ms.mp3" },
+        { "id": "body-hand", "number": 7, "title": "Tangan", "arabic": "يَدٌ", "transliteration": "Yadun", "translation": "Tangan", "audio": "assets/audio/body/body-hand-ar.mp3", "introAudio": "assets/audio/body/body-hand-ms.mp3" },
+        { "id": "body-teeth", "number": 8, "title": "Gigi", "arabic": "أَسْنَانٌ", "transliteration": "Asnanun", "translation": "Gigi", "audio": "assets/audio/body/body-teeth-ar.mp3", "introAudio": "assets/audio/body/body-teeth-ms.mp3" },
+        { "id": "body-lips", "number": 9, "title": "Bibir", "arabic": "شَفَتَانِ", "transliteration": "Syafatan", "translation": "Bibir", "audio": "assets/audio/body/body-lips-ar.mp3", "introAudio": "assets/audio/body/body-lips-ms.mp3" },
+        { "id": "body-foot", "number": 10, "title": "Tapak kaki", "arabic": "قَدَمٌ", "transliteration": "Qadamun", "translation": "Tapak kaki", "audio": "assets/audio/body/body-foot-ar.mp3", "introAudio": "assets/audio/body/body-foot-ms.mp3" },
+        { "id": "body-head", "number": 11, "title": "Kepala", "arabic": "رَأْسٌ", "transliteration": "Ra'sun", "translation": "Kepala", "audio": "assets/audio/body/body-head-ar.mp3", "introAudio": "assets/audio/body/body-head-ms.mp3" },
+        { "id": "body-face", "number": 12, "title": "Muka", "arabic": "وَجْهٌ", "transliteration": "Wajhun", "translation": "Muka", "audio": "assets/audio/body/body-face-ar.mp3", "introAudio": "assets/audio/body/body-face-ms.mp3" }
+      ]
     }
   ]
 }

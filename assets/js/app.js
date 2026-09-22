@@ -178,7 +178,7 @@ function renderLesson(topic, item) {
         ${item.transliteration ? `<p class="transliteration">${escapeHtml(item.transliteration)}</p>` : ""}
         <p class="translation">${escapeHtml(item.translation || "Baca dengan perlahan dan ulang bersama ibu atau ayah.")}</p>
         <div class="detail-actions">
-          ${topic.id === "colors" ? '<button class="button" id="speak-button" type="button">◖ Dengar sebutan</button>' : topic.id === "hadis" ? '<button class="button" id="speak-button" type="button">◖ Dengar Hadis</button>' : ""}
+          ${topic.id === "colors" ? '<button class="button" id="speak-button" type="button">◖ Dengar sebutan</button>' : topic.id === "hadis" ? '<button class="button" id="speak-button" type="button">◖ Dengar Hadis</button>' : item.audio ? '<button class="button" id="speak-button" type="button">◖ Dengar audio</button>' : ""}
           <button class="button secondary" id="revised-button" type="button" aria-pressed="${done}">${done ? "✓ Sudah diulang" : "Tanda sudah diulang"}</button>
         </div>
         <nav class="detail-nav" aria-label="Navigasi pelajaran">
@@ -250,7 +250,7 @@ function playHomeQuote() {
 
 function playArabic(item) {
   const button = document.querySelector("#speak-button");
-  const idleLabel = item.id.startsWith("hadis-") ? "◖ Dengar Hadis" : "◖ Dengar sebutan";
+  const idleLabel = item.id.startsWith("hadis-") ? "◖ Dengar Hadis" : item.id.startsWith("family-") || item.id.startsWith("body-") ? "◖ Dengar audio" : "◖ Dengar sebutan";
   const audioFiles = [item.introAudio, item.audio].filter(Boolean);
   if (!audioFiles.length) {
     speakArabic(item.arabic, item.title);
