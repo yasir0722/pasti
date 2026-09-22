@@ -52,14 +52,14 @@
       "icon": "●",
       "tone": "sky",
       "items": [
-        { "id": "ahmar", "number": 1, "title": "Merah", "arabic": "أَحْمَرُ", "transliteration": "Ahmar", "translation": "Merah", "accent": "#e17b72" },
-        { "id": "azraq", "number": 2, "title": "Biru", "arabic": "أَزْرَقُ", "transliteration": "Azraq", "translation": "Biru", "accent": "#76a9d6" },
-        { "id": "asfar", "number": 3, "title": "Kuning", "arabic": "أَصْفَرُ", "transliteration": "Asfar", "translation": "Kuning", "accent": "#f0ca62" },
-        { "id": "akhdar", "number": 4, "title": "Hijau", "arabic": "أَخْضَرُ", "transliteration": "Akhdar", "translation": "Hijau", "accent": "#82b994" },
-        { "id": "abyad", "number": 5, "title": "Putih", "arabic": "أَبْيَضُ", "transliteration": "Abyad", "translation": "Putih", "accent": "#f4f0e6" },
-        { "id": "aswad", "number": 6, "title": "Hitam", "arabic": "أَسْوَدُ", "transliteration": "Aswad", "translation": "Hitam", "accent": "#35414a" },
-        { "id": "bunni", "number": 7, "title": "Coklat", "arabic": "بُنِّيٌّ", "transliteration": "Bunni", "translation": "Coklat", "accent": "#a8795c" },
-        { "id": "wardi", "number": 8, "title": "Merah jambu", "arabic": "وَرْدِيٌّ", "transliteration": "Wardi", "translation": "Merah jambu", "accent": "#e6a0b8" }
+        { "id": "ahmar", "number": 1, "title": "Merah", "arabic": "أَحْمَرُ", "transliteration": "Ahmar", "translation": "Merah", "accent": "#e17b72", "audio": "assets/audio/colors/ahmar.mp3" },
+        { "id": "azraq", "number": 2, "title": "Biru", "arabic": "أَزْرَقُ", "transliteration": "Azraq", "translation": "Biru", "accent": "#76a9d6", "audio": "assets/audio/colors/azraq.mp3" },
+        { "id": "asfar", "number": 3, "title": "Kuning", "arabic": "أَصْفَرُ", "transliteration": "Asfar", "translation": "Kuning", "accent": "#f0ca62", "audio": "assets/audio/colors/asfar.mp3" },
+        { "id": "akhdar", "number": 4, "title": "Hijau", "arabic": "أَخْضَرُ", "transliteration": "Akhdar", "translation": "Hijau", "accent": "#82b994", "audio": "assets/audio/colors/akhdar.mp3" },
+        { "id": "abyad", "number": 5, "title": "Putih", "arabic": "أَبْيَضُ", "transliteration": "Abyad", "translation": "Putih", "accent": "#f4f0e6", "audio": "assets/audio/colors/abyad.mp3" },
+        { "id": "aswad", "number": 6, "title": "Hitam", "arabic": "أَسْوَدُ", "transliteration": "Aswad", "translation": "Hitam", "accent": "#35414a", "audio": "assets/audio/colors/aswad.mp3" },
+        { "id": "bunni", "number": 7, "title": "Coklat", "arabic": "بُنِّيٌّ", "transliteration": "Bunni", "translation": "Coklat", "accent": "#a8795c", "audio": "assets/audio/colors/bunni.mp3" },
+        { "id": "wardi", "number": 8, "title": "Merah jambu", "arabic": "وَرْدِيٌّ", "transliteration": "Wardi", "translation": "Merah jambu", "accent": "#e6a0b8", "audio": "assets/audio/colors/wardi.mp3" }
       ]
     }
   ]

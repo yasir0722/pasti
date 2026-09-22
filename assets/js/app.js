@@ -135,7 +135,7 @@ function renderColorPanel(topic, item) {
     renderColorPanel(topic, item);
     renderColorsTopic(topic, item);
   });
-  document.querySelector("#speak-button").addEventListener("click", () => speakArabic(item.arabic, item.title));
+  document.querySelector("#speak-button").addEventListener("click", () => playArabic(item));
 }
 
 function renderLessonCard(topic, item) {
@@ -214,6 +214,19 @@ function speakArabic(text, label) {
   utterance.onend = () => { document.querySelector("#speak-button").textContent = "◖ Dengar sebutan"; };
   utterance.onerror = () => { document.querySelector("#speak-button").textContent = "◖ Dengar sebutan"; };
   window.speechSynthesis.speak(utterance);
+}
+
+function playArabic(item) {
+  const button = document.querySelector("#speak-button");
+  if (!item.audio) {
+    speakArabic(item.arabic, item.title);
+    return;
+  }
+  const audio = new Audio(item.audio);
+  button.textContent = `◖ Mendengar ${item.title}`;
+  audio.addEventListener("ended", () => { button.textContent = "◖ Dengar sebutan"; }, { once: true });
+  audio.addEventListener("error", () => speakArabic(item.arabic, item.title), { once: true });
+  audio.play().catch(() => speakArabic(item.arabic, item.title));
 }
 
 function getArabicVoice() {
