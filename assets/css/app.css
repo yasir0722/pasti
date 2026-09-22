@@ -160,6 +160,7 @@ h2 { margin-bottom: 10px; font-size: clamp(1.7rem, 4vw, 2.7rem); letter-spacing:
   .home-hero { margin-bottom: 38px; }
   h1 { font-size: 2.55rem; }
   .section-heading, .topic-header { align-items: start; flex-direction: column; }
+  .topic-meta span:first-child { display: none; }
   .lesson-grid { grid-template-columns: 1fr; }
   .lesson-card { min-height: 142px; }
   .detail-layout { gap: 30px; }
