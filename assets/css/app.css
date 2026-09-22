@@ -120,6 +120,8 @@ h2 { margin-bottom: 10px; font-size: clamp(1.7rem, 4vw, 2.7rem); letter-spacing:
 .color-swatch { width: min(210px, 65%); aspect-ratio: 1; border: 12px solid rgba(255,255,255,0.75); border-radius: 50%; box-shadow: 0 15px 35px rgba(38, 52, 59, 0.15); }
 .detail-copy h1 { margin-bottom: 18px; font-size: clamp(2.2rem, 5vw, 4rem); }
 .arabic-text { margin: 0 0 18px; direction: rtl; font-family: Georgia, serif; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.6; text-align: center; overflow-wrap: anywhere; }
+.arabic-audio { display: block; width: 100%; margin: 0 0 18px; padding: 0; border: 0; color: var(--ink); direction: rtl; background: transparent; cursor: pointer; font-family: Georgia, serif; font-size: clamp(1.9rem, 4vw, 3rem); line-height: 1.6; text-align: center; overflow-wrap: anywhere; }
+.arabic-audio:hover, .arabic-audio:focus-visible { color: var(--teal); outline: none; }
 .transliteration { margin-bottom: 12px; color: var(--teal-dark); font-size: 18px; font-weight: 800; }
 .translation { max-width: 550px; color: var(--muted); font-size: 18px; line-height: 1.65; }
 .detail-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }

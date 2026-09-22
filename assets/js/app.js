@@ -157,6 +157,9 @@ function renderLesson(topic, item) {
     : item.accent
       ? `<div class="detail-visual" style="background: ${escapeHtml(item.accent)}"><div class="color-swatch" style="background: ${escapeHtml(item.accent)}"></div></div>`
       : `<div class="detail-visual"><div class="visual-placeholder"><div class="large-arabic" lang="ar">${escapeHtml(item.arabic || "")}</div><p>Ruang untuk kad pembelajaran akan diisi dalam fasa kandungan.</p></div></div>`;
+  const arabicMarkup = item.audio
+    ? `<button class="arabic-audio" id="arabic-audio-button" type="button" lang="ar" aria-label="Dengar bacaan ${escapeHtml(item.title)}">${escapeHtml(item.arabic || "")}</button>`
+    : `<p class="arabic-text" lang="ar">${escapeHtml(item.arabic || "")}</p>`;
   app.innerHTML = `
     <a class="back-link" href="#${escapeHtml(topic.id)}">← Semua ${escapeHtml(topic.title)}</a>
     <article class="detail-layout">
@@ -164,11 +167,11 @@ function renderLesson(topic, item) {
       <div class="detail-copy">
         <p class="eyebrow">${escapeHtml(topic.title)} · ${String(item.number).padStart(2, "0")}</p>
         <h1>${escapeHtml(item.title)}</h1>
-        <p class="arabic-text" lang="ar">${escapeHtml(item.arabic || "")}</p>
+        ${arabicMarkup}
         ${item.transliteration ? `<p class="transliteration">${escapeHtml(item.transliteration)}</p>` : ""}
         <p class="translation">${escapeHtml(item.translation || "Baca dengan perlahan dan ulang bersama ibu atau ayah.")}</p>
         <div class="detail-actions">
-          ${topic.id === "colors" ? '<button class="button" id="speak-button" type="button">◖ Dengar sebutan</button>' : ""}
+          ${topic.id === "colors" ? '<button class="button" id="speak-button" type="button">◖ Dengar sebutan</button>' : topic.id === "hadis" ? '<button class="button" id="speak-button" type="button">◖ Dengar Hadis</button>' : ""}
           <button class="button secondary" id="revised-button" type="button" aria-pressed="${done}">${done ? "✓ Sudah diulang" : "Tanda sudah diulang"}</button>
         </div>
         <nav class="detail-nav" aria-label="Navigasi pelajaran">
@@ -184,7 +187,8 @@ function renderLesson(topic, item) {
     visual.innerHTML = `<div class="visual-placeholder"><div class="large-arabic" lang="ar">${escapeHtml(item.arabic || "")}</div></div>`;
   }, { once: true });
   document.querySelector("#revised-button").addEventListener("click", () => toggleRevised(item.id, topic));
-  document.querySelector("#speak-button")?.addEventListener("click", () => speakArabic(item.arabic, item.title));
+  document.querySelector("#speak-button")?.addEventListener("click", () => playArabic(item));
+  document.querySelector("#arabic-audio-button")?.addEventListener("click", () => playArabic(item));
 }
 
 function toggleRevised(itemId, topic) {
@@ -218,13 +222,14 @@ function speakArabic(text, label) {
 
 function playArabic(item) {
   const button = document.querySelector("#speak-button");
+  const idleLabel = item.id.startsWith("hadis-") ? "◖ Dengar Hadis" : "◖ Dengar sebutan";
   if (!item.audio) {
     speakArabic(item.arabic, item.title);
     return;
   }
   const audio = new Audio(item.audio);
   button.textContent = `◖ Mendengar ${item.title}`;
-  audio.addEventListener("ended", () => { button.textContent = "◖ Dengar sebutan"; }, { once: true });
+  audio.addEventListener("ended", () => { button.textContent = idleLabel; }, { once: true });
   audio.addEventListener("error", () => speakArabic(item.arabic, item.title), { once: true });
   audio.play().catch(() => speakArabic(item.arabic, item.title));
 }
