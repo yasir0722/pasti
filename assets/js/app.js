@@ -228,6 +228,7 @@ function playArabic(item) {
     return;
   }
   const audio = new Audio(item.audio);
+  audio.playbackRate = 0.75;
   button.textContent = `◖ Mendengar ${item.title}`;
   audio.addEventListener("ended", () => { button.textContent = idleLabel; }, { once: true });
   audio.addEventListener("error", () => speakArabic(item.arabic, item.title), { once: true });
