@@ -16,11 +16,15 @@
 
 * { box-sizing: border-box; }
 
+html { overflow-x: hidden; }
+
 body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
   background: radial-gradient(circle at 8% 4%, #fffdf8 0, transparent 28rem), var(--paper);
+  touch-action: pan-y;
 }
 
 button, a { -webkit-tap-highlight-color: transparent; }
