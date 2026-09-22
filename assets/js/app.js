@@ -160,7 +160,7 @@ function renderLesson(topic, item) {
   const next = topic.items[itemIndex + 1];
   const done = isRevised(item.id);
   const imageMarkup = item.image
-    ? `<div class="detail-visual has-image"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" width="768" height="960" /></div>`
+    ? `<div class="detail-visual has-image${topic.id === "family" || topic.id === "body" ? " family-visual" : ""}"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" width="768" height="960" /></div>`
     : item.accent
       ? `<div class="detail-visual" style="background: ${escapeHtml(item.accent)}"><div class="color-swatch" style="background: ${escapeHtml(item.accent)}"></div></div>`
       : `<div class="detail-visual"><div class="visual-placeholder"><div class="large-arabic" lang="ar">${escapeHtml(item.arabic || "")}</div><p>Ruang untuk kad pembelajaran akan diisi dalam fasa kandungan.</p></div></div>`;
@@ -269,11 +269,11 @@ function playArabic(item) {
     audio.addEventListener("ended", playNextAudio, { once: true });
     audio.addEventListener("error", () => {
       if (audioIndex < audioFiles.length) playNextAudio();
-      else speakArabic(item.arabic, item.title);
+      else button.textContent = idleLabel;
     }, { once: true });
     audio.play().catch(() => {
       if (audioIndex < audioFiles.length) playNextAudio();
-      else speakArabic(item.arabic, item.title);
+      else button.textContent = idleLabel;
     });
   };
   playNextAudio();
