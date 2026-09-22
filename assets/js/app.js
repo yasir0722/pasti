@@ -223,16 +223,32 @@ function speakArabic(text, label) {
 function playArabic(item) {
   const button = document.querySelector("#speak-button");
   const idleLabel = item.id.startsWith("hadis-") ? "◖ Dengar Hadis" : "◖ Dengar sebutan";
-  if (!item.audio) {
+  const audioFiles = [item.introAudio, item.audio].filter(Boolean);
+  if (!audioFiles.length) {
     speakArabic(item.arabic, item.title);
     return;
   }
-  const audio = new Audio(item.audio);
-  audio.playbackRate = 0.75;
-  button.textContent = `◖ Mendengar ${item.title}`;
-  audio.addEventListener("ended", () => { button.textContent = idleLabel; }, { once: true });
-  audio.addEventListener("error", () => speakArabic(item.arabic, item.title), { once: true });
-  audio.play().catch(() => speakArabic(item.arabic, item.title));
+  let audioIndex = 0;
+  const playNextAudio = () => {
+    if (audioIndex >= audioFiles.length) {
+      button.textContent = idleLabel;
+      return;
+    }
+    const audio = new Audio(audioFiles[audioIndex]);
+    audio.playbackRate = 0.75;
+    button.textContent = `◖ Mendengar ${item.title}`;
+    audioIndex += 1;
+    audio.addEventListener("ended", playNextAudio, { once: true });
+    audio.addEventListener("error", () => {
+      if (audioIndex < audioFiles.length) playNextAudio();
+      else speakArabic(item.arabic, item.title);
+    }, { once: true });
+    audio.play().catch(() => {
+      if (audioIndex < audioFiles.length) playNextAudio();
+      else speakArabic(item.arabic, item.title);
+    });
+  };
+  playNextAudio();
 }
 
 function getArabicVoice() {
