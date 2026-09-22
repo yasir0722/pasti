@@ -98,11 +98,17 @@ function renderColorsTopic(topic, selectedItem) {
       <div><p class="eyebrow">${escapeHtml(topic.eyebrow)}</p><h1>${escapeHtml(topic.title)}</h1><p class="intro">${escapeHtml(topic.description)}</p></div>
       <span class="topic-count">${topicProgress(topic)} / ${topic.items.length} sudah diulang</span>
     </section>
+    <div class="color-picker" aria-label="Pilih warna">
+      ${topic.items.map((item) => `<button class="color-picker-button${item.id === selectedItem.id ? " is-selected" : ""}" type="button" aria-label="Pilih ${escapeHtml(item.title)}" aria-pressed="${item.id === selectedItem.id}" style="--picker-color: ${escapeHtml(item.accent)}"></button>`).join("")}
+    </div>
     <section class="color-detail-panel" id="color-detail" aria-live="polite"></section>
     <section class="lesson-grid color-grid" aria-label="Senarai ${escapeHtml(topic.title)}">
       ${topic.items.map((item) => renderLessonCard(topic, item)).join("")}
     </section>`;
   renderColorPanel(topic, selectedItem);
+  document.querySelectorAll(".color-picker-button").forEach((button, index) => {
+    button.addEventListener("click", () => renderColorsTopic(topic, topic.items[index]));
+  });
   document.querySelectorAll(".color-grid .lesson-card").forEach((card, index) => {
     card.href = "#colors";
     card.addEventListener("click", (event) => {
