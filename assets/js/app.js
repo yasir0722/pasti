@@ -440,6 +440,11 @@ function playGameQuestionAudio(question, button) {
 
 function playGameAnswerAudio(question, option, button) {
   if (!option) return;
+  if (option.pronunciationItem?.audio) {
+    const item = option.pronunciationItem;
+    playGameAudioFile(item.audio, button);
+    return;
+  }
   if (option.pronunciationItem?.pronunciation) {
     const item = option.pronunciationItem;
     speakArabic(item.arabic, item.title, item.pronunciation, button, "Dengar");
@@ -449,8 +454,25 @@ function playGameAnswerAudio(question, option, button) {
   speakGameText(option.label, language, button, "Dengar");
 }
 
+function playGameAudioFile(source, button) {
+  const audio = new Audio(source);
+  if (button) button.textContent = "Mendengar";
+  audio.addEventListener("ended", () => {
+    if (button) button.textContent = "Dengar";
+  }, { once: true });
+  audio.addEventListener("error", () => {
+    showAudioError(button);
+  }, { once: true });
+  audio.play().catch(() => {
+    showAudioError(button);
+  });
+}
+
 function speakGameText(text, language, button, idleLabel) {
-  if (!("speechSynthesis" in window)) return;
+  if (!("speechSynthesis" in window)) {
+    showAudioError(button);
+    return;
+  }
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(text);
   const voice = language.startsWith("ms") ? getMalayVoice() : getVoice(language);
@@ -460,8 +482,18 @@ function speakGameText(text, language, button, idleLabel) {
   utterance.pitch = 1;
   utterance.onstart = () => { if (button) button.textContent = "Mendengar"; };
   utterance.onend = () => { if (button) button.textContent = idleLabel; };
-  utterance.onerror = () => { if (button) button.textContent = idleLabel; };
+  utterance.onerror = () => showAudioError(button, idleLabel);
   window.speechSynthesis.speak(utterance);
+}
+
+function showAudioError(button, idleLabel = "Dengar") {
+  if (!button) return;
+  button.textContent = "Suara tidak tersedia";
+  button.title = "Semak kelantangan telefon dan cuba lagi.";
+  window.setTimeout(() => {
+    button.textContent = idleLabel;
+    button.title = "";
+  }, 2200);
 }
 
 function playGameFeedback(isCorrect) {
@@ -681,7 +713,7 @@ function speakArabic(text, label, fallbackText = text, button = document.querySe
   utterance.pitch = 1;
   utterance.onstart = () => { if (button) button.textContent = `◖ Mendengar ${label}`; };
   utterance.onend = () => { if (button) button.textContent = idleLabel; };
-  utterance.onerror = () => { if (button) button.textContent = idleLabel; };
+  utterance.onerror = () => showAudioError(button, idleLabel);
   window.speechSynthesis.speak(utterance);
 }
 
