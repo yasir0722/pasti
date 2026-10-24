@@ -23,6 +23,7 @@ The first version should remain child-friendly and require no login, account, or
 
 ```text
 Home
+  -> Arabic word-picture matching game
   -> Hadis
       -> list of 20 Hadis
           -> one Hadis detail page
@@ -43,6 +44,8 @@ Show only large, clear topic choices:
 - Colors
 
 Each topic tile includes a small image or simple illustrated icon and the number of available lessons. There is no feed, sign-in, advertising, or unrelated navigation.
+
+The home page also offers short Arabic word-matching games based on the supplied worksheets. Each game shows one color-coded Bahagian at a time, with words on one side and pictures on the other. Children complete all pairs in a Bahagian, then choose `Bahagian seterusnya` to continue. They can drag words or tap a word and its matching picture on touch screens; tapping a word also plays its local Arabic pronunciation audio.
 
 ### Topic page
 

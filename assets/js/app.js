@@ -3,6 +3,9 @@ const progressKey = "pasti-revised-v1";
 let content = { topics: [] };
 let revised = readProgress();
 let gameSession = null;
+let wordMatchSession = null;
+let wordMatchAudio = null;
+let wordMatchAudioButton = null;
 let activeRoute = "";
 
 function readProgress() {
@@ -433,6 +436,326 @@ function startSetOneGame() {
   renderSetOneGame();
 }
 
+function getWordMatchExercise(exerciseId) {
+  return content.exercises?.find((exercise) => exercise.id === exerciseId);
+}
+
+function startWordMatchGame(exerciseId = "arabic-word-picture") {
+  const exercise = getWordMatchExercise(exerciseId);
+  if (!exercise) {
+    app.innerHTML = '<a class="back-link" href="#home">← Kembali ke utama</a><p class="empty-state">Aktiviti padanan belum tersedia.</p>';
+    return;
+  }
+  stopWordMatchAudio();
+  wordMatchSession = {
+    exercise,
+    categories: exercise.categories.map((category) => ({
+      ...category,
+      words: shuffle(category.items),
+      pictures: shuffle(category.items)
+    })),
+    categoryIndex: 0,
+    matches: {},
+    selectedWord: null,
+    feedback: "Pilih satu perkataan untuk bermula.",
+    feedbackTone: ""
+  };
+  renderWordMatchGame();
+}
+
+function renderWordMatchGame() {
+  if (!wordMatchSession) return;
+  const { exercise, categories } = wordMatchSession;
+  const total = categories.reduce((count, category) => count + category.items.length, 0);
+  const category = categories[wordMatchSession.categoryIndex];
+  if (!category) {
+    renderWordMatchResult();
+    return;
+  }
+  const completedBefore = categories
+    .slice(0, wordMatchSession.categoryIndex)
+    .reduce((count, entry) => count + entry.items.length, 0);
+  const matched = Object.keys(wordMatchSession.matches).length;
+  if (matched === category.items.length) {
+    renderWordMatchCategoryComplete();
+    return;
+  }
+  const progress = Math.round(((completedBefore + matched) / total) * 100);
+
+  app.innerHTML = `
+    <a class="back-link" href="#home">← Kembali ke utama</a>
+    <section class="match-game-page" aria-labelledby="word-match-game-title">
+      <header class="game-header">
+        <div><p class="eyebrow">Bahasa Arab · Aktiviti padanan</p><h1 id="word-match-game-title">${escapeHtml(exercise.title)}</h1></div>
+        <button class="button secondary game-restart" id="word-match-restart" type="button">↻ Mula semula</button>
+      </header>
+      <p class="match-instructions">Klik perkataan untuk dengar sebutannya, kemudian seret ke gambar yang betul. Pada telefon, sentuh perkataan kemudian sentuh gambarnya.</p>
+      <div class="game-progress" aria-label="Kemajuan aktiviti">
+        <div><span>${escapeHtml(category.title)} · ${matched} / ${category.items.length}</span><strong>${completedBefore + matched} / ${total}</strong></div>
+        <div class="game-progress-track" aria-hidden="true"><span style="width: ${progress}%"></span></div>
+      </div>
+      <p class="match-feedback${wordMatchSession.feedbackTone ? ` is-${wordMatchSession.feedbackTone}` : ""}" id="word-match-feedback" role="status" aria-live="polite">${escapeHtml(wordMatchSession.feedback)}</p>
+      <div class="match-category-grid match-category-grid-single">
+        ${renderWordMatchCategory(category)}
+      </div>
+    </section>`;
+
+  document.querySelector("#word-match-restart")?.addEventListener("click", () => startWordMatchGame(exercise.id));
+  document.querySelectorAll("[data-match-word]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const item = getWordMatchItem(button.dataset.categoryId, button.dataset.matchWord);
+      selectWordMatch(button.dataset.categoryId, button.dataset.matchWord);
+      playWordMatchAudio(item, button);
+    });
+    button.addEventListener("dragstart", (event) => {
+      if (wordMatchSession.matches[button.dataset.matchWord]) {
+        event.preventDefault();
+        return;
+      }
+      event.dataTransfer.setData("text/plain", `${button.dataset.categoryId}:${button.dataset.matchWord}`);
+      event.dataTransfer.effectAllowed = "move";
+      wordMatchSession.selectedWord = {
+        categoryId: button.dataset.categoryId,
+        itemId: button.dataset.matchWord
+      };
+    });
+  });
+  document.querySelectorAll("[data-match-target]").forEach((button) => {
+    button.addEventListener("click", () => tryWordMatch(button.dataset.categoryId, button.dataset.matchTarget));
+    button.addEventListener("dragover", (event) => {
+      if (!wordMatchSession.matches[button.dataset.matchTarget]) {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = "move";
+      }
+    });
+    button.addEventListener("drop", (event) => {
+      event.preventDefault();
+      const [categoryId, itemId] = event.dataTransfer.getData("text/plain").split(":");
+      if (categoryId && itemId) tryWordMatch(button.dataset.categoryId, button.dataset.matchTarget, { categoryId, itemId });
+    });
+  });
+  window.requestAnimationFrame(drawWordMatchConnections);
+}
+
+function getWordMatchItem(categoryId, itemId) {
+  return wordMatchSession.exercise.categories
+    .find((category) => category.id === categoryId)
+    ?.items.find((item) => item.id === itemId);
+}
+
+function playWordMatchAudio(item, button) {
+  if (!item?.audio) {
+    wordMatchSession.feedback = "Audio sebutan belum tersedia.";
+    wordMatchSession.feedbackTone = "wrong";
+    updateWordMatchFeedback();
+    console.error(`No pronunciation audio is configured for ${item?.id || "the selected word"}.`);
+    return;
+  }
+
+  stopWordMatchAudio();
+  const audio = new Audio(item.audio);
+  wordMatchAudio = audio;
+  wordMatchAudioButton = button;
+  button.classList.add("is-speaking");
+  const finish = () => {
+    button.classList.remove("is-speaking");
+    if (wordMatchAudio === audio) {
+      wordMatchAudio = null;
+      wordMatchAudioButton = null;
+    }
+  };
+  let errorReported = false;
+  const reportError = (error) => {
+    if (errorReported || wordMatchAudio !== audio) return;
+    errorReported = true;
+    finish();
+    wordMatchSession.feedback = "Audio sebutan tidak dapat dimainkan. Cuba lagi.";
+    wordMatchSession.feedbackTone = "wrong";
+    updateWordMatchFeedback();
+    console.error(`Could not play pronunciation audio for ${item.id}.`, error);
+  };
+  audio.addEventListener("ended", finish, { once: true });
+  audio.addEventListener("error", () => reportError(new Error(`Failed to load ${item.audio}`)), { once: true });
+  audio.play().catch(reportError);
+}
+
+function stopWordMatchAudio() {
+  if (wordMatchAudio) {
+    wordMatchAudio.pause();
+    wordMatchAudio.currentTime = 0;
+    wordMatchAudio = null;
+  }
+  wordMatchAudioButton?.classList.remove("is-speaking");
+  wordMatchAudioButton = null;
+}
+
+function renderWordMatchCategory(category) {
+  return `<section class="match-category match-category-${escapeHtml(category.tone)}" data-match-category="${escapeHtml(category.id)}" aria-labelledby="match-category-${escapeHtml(category.id)}">
+    <h2 id="match-category-${escapeHtml(category.id)}">${escapeHtml(category.title)}</h2>
+    <div class="match-column-labels" aria-hidden="true"><span>Perkataan</span><span>Gambar</span></div>
+    <div class="match-board-stage">
+      <svg class="match-connections" aria-hidden="true"></svg>
+      <div class="match-columns">
+        <div class="match-word-list" role="group" aria-label="Perkataan ${escapeHtml(category.title)}">
+          ${category.words.map((item) => {
+            const matched = Boolean(wordMatchSession.matches[item.id]);
+            const selected = wordMatchSession.selectedWord?.itemId === item.id;
+            return `<button class="match-word${selected ? " is-selected" : ""}${matched ? " is-matched" : ""}" type="button" data-category-id="${escapeHtml(category.id)}" data-match-word="${escapeHtml(item.id)}" aria-pressed="${selected}" aria-label="${matched ? "Dengar semula" : "Pilih dan dengar"} perkataan ${escapeHtml(item.arabic)}" lang="ar" dir="rtl" draggable="${!matched}">
+              <span class="match-word-label">${escapeHtml(item.arabic)}</span><span class="match-word-dot" aria-hidden="true"></span>
+            </button>`;
+          }).join("")}
+        </div>
+        <div class="match-picture-list" role="group" aria-label="Gambar ${escapeHtml(category.title)}">
+          ${category.pictures.map((item) => {
+            const matched = Boolean(wordMatchSession.matches[item.id]);
+            return `<button class="match-picture${matched ? " is-matched" : ""}" type="button" data-category-id="${escapeHtml(category.id)}" data-match-target="${escapeHtml(item.id)}" aria-label="Gambar: ${escapeHtml(item.meaning)}"${matched ? " disabled" : ""}>
+              <span class="match-picture-dot" aria-hidden="true"></span><img src="${escapeHtml(item.image)}" alt="" width="112" height="66" />
+            </button>`;
+          }).join("")}
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function selectWordMatch(categoryId, itemId) {
+  if (wordMatchSession.matches[itemId]) return;
+  if (wordMatchSession.selectedWord?.itemId === itemId) {
+    wordMatchSession.selectedWord = null;
+    wordMatchSession.feedback = "Pilihan dibatalkan. Pilih satu perkataan untuk bermula.";
+    wordMatchSession.feedbackTone = "";
+  } else {
+    const item = wordMatchSession.exercise.categories
+      .find((category) => category.id === categoryId)
+      ?.items.find((entry) => entry.id === itemId);
+    wordMatchSession.selectedWord = { categoryId, itemId };
+    wordMatchSession.feedback = `Dipilih: ${item.arabic}. Sekarang pilih gambar yang sepadan.`;
+    wordMatchSession.feedbackTone = "";
+  }
+  updateWordMatchFeedback();
+  document.querySelectorAll("[data-match-word]").forEach((button) => {
+    const selected = button.dataset.matchWord === wordMatchSession.selectedWord?.itemId;
+    button.classList.toggle("is-selected", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  });
+}
+
+function tryWordMatch(categoryId, targetId, draggedWord = null) {
+  const selectedWord = draggedWord || wordMatchSession.selectedWord;
+  if (!selectedWord) {
+    wordMatchSession.feedback = "Pilih dahulu satu perkataan Arab.";
+    wordMatchSession.feedbackTone = "wrong";
+    updateWordMatchFeedback();
+    return;
+  }
+  if (selectedWord.categoryId !== categoryId) {
+    wordMatchSession.feedback = "Padankan perkataan dengan gambar dalam bahagian yang sama.";
+    wordMatchSession.feedbackTone = "wrong";
+    updateWordMatchFeedback();
+    return;
+  }
+  if (selectedWord.itemId !== targetId) {
+    wordMatchSession.feedback = "Belum tepat. Cuba padanan lain.";
+    wordMatchSession.feedbackTone = "wrong";
+    playGameFeedback(false);
+    updateWordMatchFeedback();
+    return;
+  }
+
+  wordMatchSession.matches[targetId] = true;
+  wordMatchSession.selectedWord = null;
+  const item = wordMatchSession.exercise.categories
+    .find((category) => category.id === categoryId)
+    .items.find((entry) => entry.id === targetId);
+  wordMatchSession.feedback = `Bagus! ${item.arabic} bermaksud ${item.meaning}.`;
+  wordMatchSession.feedbackTone = "correct";
+  playGameFeedback(true);
+  renderWordMatchGame();
+}
+
+function updateWordMatchFeedback() {
+  const feedback = document.querySelector("#word-match-feedback");
+  if (!feedback) return;
+  feedback.textContent = wordMatchSession.feedback;
+  feedback.className = `match-feedback${wordMatchSession.feedbackTone ? ` is-${wordMatchSession.feedbackTone}` : ""}`;
+}
+
+function drawWordMatchConnections() {
+  if (!wordMatchSession) return;
+  const namespace = "http://www.w3.org/2000/svg";
+  wordMatchSession.categories.forEach((category) => {
+    const panel = document.querySelector(`[data-match-category="${category.id}"]`);
+    const svg = panel?.querySelector(".match-connections");
+    if (!panel || !svg) return;
+    const stageRect = svg.parentElement.getBoundingClientRect();
+    svg.setAttribute("viewBox", `0 0 ${stageRect.width} ${stageRect.height}`);
+    svg.replaceChildren();
+    category.items.forEach((item) => {
+      if (!wordMatchSession.matches[item.id]) return;
+      const source = panel.querySelector(`[data-match-word="${item.id}"] .match-word-dot`);
+      const target = panel.querySelector(`[data-match-target="${item.id}"] .match-picture-dot`);
+      if (!source || !target) return;
+      const sourceRect = source.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const line = document.createElementNS(namespace, "line");
+      line.setAttribute("x1", String(sourceRect.left + sourceRect.width / 2 - stageRect.left));
+      line.setAttribute("y1", String(sourceRect.top + sourceRect.height / 2 - stageRect.top));
+      line.setAttribute("x2", String(targetRect.left + targetRect.width / 2 - stageRect.left));
+      line.setAttribute("y2", String(targetRect.top + targetRect.height / 2 - stageRect.top));
+      line.classList.add("match-connection");
+      svg.append(line);
+    });
+  });
+}
+
+function renderWordMatchCategoryComplete() {
+  const { exercise, categories, categoryIndex } = wordMatchSession;
+  const category = categories[categoryIndex];
+  const isLastCategory = categoryIndex === categories.length - 1;
+  app.innerHTML = `
+    <a class="back-link" href="#home">← Kembali ke utama</a>
+    <section class="match-game-page" aria-labelledby="word-match-section-title">
+      <article class="game-board game-result match-category-result">
+        <p class="eyebrow">Bahagian ${categoryIndex + 1} selesai</p>
+        <div class="game-result-stars" aria-hidden="true">★ ★ ★</div>
+        <h1 id="word-match-section-title">${escapeHtml(category.title)} selesai!</h1>
+        <p>Semua ${category.items.length} perkataan sudah dipadankan dengan betul.</p>
+        <p class="game-result-note">${isLastCategory ? "Hebat! Semua bahagian sudah selesai." : "Bagus! Bersedia untuk bahagian seterusnya."}</p>
+        <button class="button" id="word-match-next-category" type="button">${isLastCategory ? "Selesai semua bahagian" : "Bahagian seterusnya →"}</button>
+      </article>
+    </section>`;
+  document.querySelector("#word-match-next-category")?.addEventListener("click", () => {
+    wordMatchSession.categoryIndex += 1;
+    wordMatchSession.matches = {};
+    wordMatchSession.selectedWord = null;
+    if (wordMatchSession.categoryIndex >= categories.length) {
+      renderWordMatchResult();
+      return;
+    }
+    wordMatchSession.feedback = "Pilih satu perkataan untuk bermula.";
+    wordMatchSession.feedbackTone = "";
+    renderWordMatchGame();
+  });
+}
+
+function renderWordMatchResult() {
+  const exercise = wordMatchSession.exercise;
+  const total = exercise.categories.reduce((count, category) => count + category.items.length, 0);
+  app.innerHTML = `
+    <a class="back-link" href="#home">← Kembali ke utama</a>
+    <section class="match-game-page" aria-labelledby="word-match-result-title">
+      <article class="game-board game-result">
+        <p class="eyebrow">Aktiviti selesai</p>
+        <div class="game-result-stars" aria-hidden="true">★ ★ ★</div>
+        <h1 id="word-match-result-title">Syabas, semua sepadan!</h1>
+        <p>Semua ${total} perkataan dalam ${exercise.categories.length} bahagian berjaya dipadankan.</p>
+        <p class="game-result-note">Main lagi untuk cuba susunan yang baharu.</p>
+        <button class="button" id="word-match-play-again" type="button">↻ Main lagi</button>
+      </article>
+    </section>`;
+  document.querySelector("#word-match-play-again")?.addEventListener("click", () => startWordMatchGame(exercise.id));
+}
+
 function playGameQuestionAudio(question, button) {
   const language = question.category === "English" ? "en-US" : "ms-MY";
   speakGameText(question.prompt, language, button, "Dengar soalan");
@@ -531,14 +854,25 @@ function renderHome() {
         <p>Ya Tuhanku, tambahkanlah kepadaku ilmu pengetahuan.</p>
       </button>
     </section>
-    <section class="game-launch" aria-labelledby="set-one-game-title">
-      <div class="game-launch-icon" aria-hidden="true">✦</div>
-      <div>
-        <p class="eyebrow">Latihan Persediaan 5 Tahun</p>
-        <h2 id="set-one-game-title">Misi Set 1</h2>
-        <p>12 cabaran ringkas Bahasa Melayu, English, Matematik, Sains, Jawi dan Bahasa Arab.</p>
-      </div>
-      <a class="button game-launch-button" href="#set-1-game">Mula bermain <span aria-hidden="true">→</span></a>
+    <section class="game-launch-list" aria-label="Permainan">
+      <article class="game-launch" aria-labelledby="set-one-game-title">
+        <div class="game-launch-icon" aria-hidden="true">✦</div>
+        <div>
+          <p class="eyebrow">Latihan Persediaan 5 Tahun</p>
+          <h2 id="set-one-game-title">Misi Set 1</h2>
+          <p>12 cabaran ringkas Bahasa Melayu, English, Matematik, Sains, Jawi dan Bahasa Arab.</p>
+        </div>
+        <a class="button game-launch-button" href="#set-1-game">Mula bermain <span aria-hidden="true">→</span></a>
+      </article>
+      ${content.exercises.map((exercise, index) => `<article class="game-launch word-match-launch" aria-labelledby="word-match-title-${index}">
+        <div class="game-launch-icon" aria-hidden="true">${index === 0 ? "↔" : "✦"}</div>
+        <div>
+          <p class="eyebrow">Bahasa Arab · Aktiviti padanan</p>
+          <h2 id="word-match-title-${index}">${escapeHtml(exercise.title)}</h2>
+          <p>${escapeHtml(exercise.description)}</p>
+        </div>
+        <a class="button game-launch-button" href="#word-match/${escapeHtml(exercise.id)}">Mula memadankan <span aria-hidden="true">→</span></a>
+      </article>`).join("")}
     </section>
     <section aria-labelledby="topics-title">
       <div class="section-heading">
@@ -803,11 +1137,21 @@ if ("speechSynthesis" in window) {
 function renderRoute() {
   const [topicId, lessonId] = window.location.hash.slice(1).split("/");
   const route = topicId || "home";
+  const requestedWordMatchExerciseId = topicId === "word-match" ? lessonId || "arabic-word-picture" : null;
   const enteringGame = route === "set-1-game" && activeRoute !== route;
+  const enteringWordMatch = route === "word-match" && activeRoute !== route;
   activeRoute = route;
+  if (route !== "word-match") stopWordMatchAudio();
   if (enteringGame) gameSession = null;
+  if (enteringWordMatch) wordMatchSession = null;
   if (topicId === "set-1-game") {
     renderSetOneGame();
+  } else if (topicId === "word-match") {
+    if (!wordMatchSession || wordMatchSession.exercise.id !== requestedWordMatchExerciseId) {
+      startWordMatchGame(requestedWordMatchExerciseId);
+    } else {
+      renderWordMatchGame();
+    }
   } else if (!topicId || topicId === "home") {
     renderHome();
   } else {
@@ -830,6 +1174,7 @@ async function start() {
     if (!response.ok) throw new Error("Content could not be loaded");
     content = await response.json();
     window.addEventListener("hashchange", renderRoute);
+    window.addEventListener("resize", drawWordMatchConnections);
     renderRoute();
   } catch (error) {
     app.innerHTML = `<div class="empty-state"><h2>Belum dapat dibuka</h2><p>Pastikan aplikasi dibuka melalui GitHub Pages atau pelayan web tempatan.</p></div>`;

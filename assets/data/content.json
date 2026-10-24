@@ -100,5 +100,143 @@
         { "id": "body-face", "number": 12, "title": "Muka", "arabic": "وَجْهٌ", "transliteration": "Wajhun", "pronunciation": "wajhun", "translation": "Muka", "audio": "assets/audio/body/body-face-ar.mp3", "introAudio": "assets/audio/body/body-face-ms.mp3" }
       ]
     }
+  ],
+  "exercises": [
+        {
+          "id": "arabic-word-picture",
+          "title": "Padankan Perkataan Dengan Gambar",
+          "description": "Padankan 16 perkataan Arab dengan gambar yang betul.",
+          "categories": [
+            {
+              "id": "school",
+              "title": "Bahagian 1: Alatan Sekolah",
+              "tone": "pink",
+              "items": [
+                { "id": "school-pen", "arabic": "قَلَمٌ", "meaning": "Pen", "image": "assets/images/word-match/school-pen.png", "audio": "assets/audio/word-match/school-pen-ar.mp3" },
+                { "id": "school-book", "arabic": "كِتَابٌ", "meaning": "Buku", "image": "assets/images/word-match/school-book.png", "audio": "assets/audio/word-match/school-book-ar.mp3" },
+                { "id": "school-ruler", "arabic": "مِسْطَرَةٌ", "meaning": "Pembaris", "image": "assets/images/word-match/school-ruler.png", "audio": "assets/audio/word-match/school-ruler-ar.mp3" },
+                { "id": "school-eraser", "arabic": "مِمْحَاةٌ", "meaning": "Pemadam", "image": "assets/images/word-match/school-eraser.png", "audio": "assets/audio/word-match/school-eraser-ar.mp3" },
+                { "id": "school-board", "arabic": "سَبُّورَةٌ", "meaning": "Papan hitam", "image": "assets/images/word-match/school-board.png", "audio": "assets/audio/word-match/school-board-ar.mp3" },
+                { "id": "school-pencil", "arabic": "مِرْسَمٌ", "meaning": "Pensel", "image": "assets/images/word-match/school-pencil.png", "audio": "assets/audio/word-match/school-pencil-ar.mp3" }
+              ]
+            },
+            {
+              "id": "food",
+              "title": "Bahagian 2: Makanan",
+              "tone": "cyan",
+              "items": [
+                { "id": "food-rice", "arabic": "أَرُزٌّ", "meaning": "Nasi", "image": "assets/images/word-match/food-rice.png", "audio": "assets/audio/word-match/food-rice-ar.mp3" },
+                { "id": "food-bread", "arabic": "خُبْزٌ", "meaning": "Roti", "image": "assets/images/word-match/food-bread.png", "audio": "assets/audio/word-match/food-bread-ar.mp3" },
+                { "id": "food-cake", "arabic": "كَعْكٌ", "meaning": "Kek", "image": "assets/images/word-match/food-cake.png", "audio": "assets/audio/word-match/food-cake-ar.mp3" },
+                { "id": "food-cookies", "arabic": "بِسْكُوِيتٌ", "meaning": "Biskut", "image": "assets/images/word-match/food-cookies.png", "audio": "assets/audio/word-match/food-cookies-ar.mp3" }
+              ]
+            },
+            {
+              "id": "clothing",
+              "title": "Bahagian 3: Pakaian",
+              "tone": "green",
+              "items": [
+                { "id": "clothing-hijab", "arabic": "خِمَارٌ", "meaning": "Tudung", "image": "assets/images/word-match/clothing-hijab.png", "audio": "assets/audio/word-match/clothing-hijab-ar.mp3" },
+                { "id": "clothing-shirt", "arabic": "قَمِيصٌ", "meaning": "Baju", "image": "assets/images/word-match/clothing-shirt.png", "audio": "assets/audio/word-match/clothing-shirt-ar.mp3" },
+                { "id": "clothing-cap", "arabic": "طَاقِيَّةٌ", "meaning": "Kopiah", "image": "assets/images/word-match/clothing-cap.png", "audio": "assets/audio/word-match/clothing-cap-ar.mp3" },
+                { "id": "clothing-pants", "arabic": "سِرْوَالٌ", "meaning": "Seluar", "image": "assets/images/word-match/clothing-pants.png", "audio": "assets/audio/word-match/clothing-pants-ar.mp3" },
+                { "id": "clothing-socks", "arabic": "جَوْرَبٌ", "meaning": "Stoking", "image": "assets/images/word-match/clothing-socks.png", "audio": "assets/audio/word-match/clothing-socks-ar.mp3" },
+                { "id": "clothing-shoes", "arabic": "حِذَاءٌ", "meaning": "Kasut", "image": "assets/images/word-match/clothing-shoes.png", "audio": "assets/audio/word-match/clothing-shoes-ar.mp3" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "family-color-fruits",
+          "title": "Keluarga, Warna dan Buah-buahan",
+          "description": "Padankan 18 perkataan Arab dalam bahagian keluarga, warna dan buah-buahan.",
+          "categories": [
+            {
+              "id": "family",
+              "title": "Bahagian 1: Keluarga",
+              "tone": "pink",
+              "items": [
+                { "id": "family-grandfather", "arabic": "جَدٌّ", "meaning": "Datuk", "image": "assets/images/word-match/family-grandfather.png", "audio": "assets/audio/family/family-grandfather-ar.mp3" },
+                { "id": "family-mother", "arabic": "أُمٌّ", "meaning": "Ibu", "image": "assets/images/word-match/family-mother.png", "audio": "assets/audio/family/family-mother-ar.mp3" },
+                { "id": "family-sister", "arabic": "أُخْتٌ", "meaning": "Kakak atau adik perempuan", "image": "assets/images/word-match/family-sister.png", "audio": "assets/audio/family/family-sister-ar.mp3" },
+                { "id": "family-brother", "arabic": "أَخٌ", "meaning": "Abang atau adik lelaki", "image": "assets/images/word-match/family-brother.png", "audio": "assets/audio/family/family-brother-ar.mp3" },
+                { "id": "family-father", "arabic": "أَبٌ", "meaning": "Ayah", "image": "assets/images/word-match/family-father.png", "audio": "assets/audio/family/family-father-ar.mp3" },
+                { "id": "family-grandmother", "arabic": "جَدَّةٌ", "meaning": "Nenek", "image": "assets/images/word-match/family-grandmother.png", "audio": "assets/audio/family/family-grandmother-ar.mp3" }
+              ]
+            },
+            {
+              "id": "colors",
+              "title": "Bahagian 2: Warna",
+              "tone": "cyan",
+              "items": [
+                { "id": "color-green", "arabic": "أَخْضَرُ", "meaning": "Hijau", "image": "assets/images/word-match/color-green.png", "audio": "assets/audio/colors/akhdar.mp3" },
+                { "id": "color-yellow", "arabic": "أَصْفَرُ", "meaning": "Kuning", "image": "assets/images/word-match/color-yellow.png", "audio": "assets/audio/colors/asfar.mp3" },
+                { "id": "color-white", "arabic": "أَبْيَضُ", "meaning": "Putih", "image": "assets/images/word-match/color-white.png", "audio": "assets/audio/colors/abyad.mp3" },
+                { "id": "color-blue", "arabic": "أَزْرَقُ", "meaning": "Biru", "image": "assets/images/word-match/color-blue.png", "audio": "assets/audio/colors/azraq.mp3" },
+                { "id": "color-red", "arabic": "أَحْمَرُ", "meaning": "Merah", "image": "assets/images/word-match/color-red.png", "audio": "assets/audio/colors/ahmar.mp3" },
+                { "id": "color-black", "arabic": "أَسْوَدُ", "meaning": "Hitam", "image": "assets/images/word-match/color-black.png", "audio": "assets/audio/colors/aswad.mp3" }
+              ]
+            },
+            {
+              "id": "fruits",
+              "title": "Bahagian 3: Buah-buahan",
+              "tone": "green",
+              "items": [
+                { "id": "fruit-banana", "arabic": "مَوْزٌ", "meaning": "Pisang", "image": "assets/images/word-match/fruit-banana.png", "audio": "assets/audio/word-match/fruit-banana-ar.mp3" },
+                { "id": "fruit-mango", "arabic": "مَانْجُو", "meaning": "Mangga", "image": "assets/images/word-match/fruit-mango.png", "audio": "assets/audio/word-match/fruit-mango-ar.mp3" },
+                { "id": "fruit-watermelon", "arabic": "بِطِّيخٌ", "meaning": "Tembikai", "image": "assets/images/word-match/fruit-watermelon.png", "audio": "assets/audio/word-match/fruit-watermelon-ar.mp3" },
+                { "id": "fruit-papaya", "arabic": "بَابَايَا", "meaning": "Betik", "image": "assets/images/word-match/fruit-papaya.png", "audio": "assets/audio/word-match/fruit-papaya-ar.mp3" },
+                { "id": "fruit-pineapple", "arabic": "أَنَانَاسٌ", "meaning": "Nanas", "image": "assets/images/word-match/fruit-pineapple.png", "audio": "assets/audio/word-match/fruit-pineapple-ar.mp3" },
+                { "id": "fruit-orange", "arabic": "بُرْتُقَالٌ", "meaning": "Oren", "image": "assets/images/word-match/fruit-orange.png", "audio": "assets/audio/word-match/fruit-orange-ar.mp3" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "body-actions-animals",
+          "title": "Anggota Badan, Perbuatan dan Haiwan",
+          "description": "Padankan 18 perkataan Arab dalam bahagian anggota badan, perbuatan dan haiwan.",
+          "categories": [
+            {
+              "id": "body-parts",
+              "title": "Bahagian 1: Anggota Badan",
+              "tone": "pink",
+              "items": [
+                { "id": "body-tooth", "arabic": "سِنٌّ", "meaning": "Gigi", "image": "assets/images/word-match/body-tooth.png", "audio": "assets/audio/word-match/body-tooth-ar.mp3" },
+                { "id": "body-eye", "arabic": "عَيْنٌ", "meaning": "Mata", "image": "assets/images/word-match/body-eye.png", "audio": "assets/audio/body/body-eye-ar.mp3" },
+                { "id": "body-ear", "arabic": "أُذُنٌ", "meaning": "Telinga", "image": "assets/images/word-match/body-ear.png", "audio": "assets/audio/body/body-ear-ar.mp3" },
+                { "id": "body-mouth", "arabic": "فَمٌ", "meaning": "Mulut", "image": "assets/images/word-match/body-mouth.png", "audio": "assets/audio/body/body-mouth-ar.mp3" },
+                { "id": "body-hair", "arabic": "شَعْرٌ", "meaning": "Rambut", "image": "assets/images/word-match/body-hair.png", "audio": "assets/audio/body/body-hair-ar.mp3" },
+                { "id": "body-nose", "arabic": "أَنْفٌ", "meaning": "Hidung", "image": "assets/images/word-match/body-nose.png", "audio": "assets/audio/body/body-nose-ar.mp3" }
+              ]
+            },
+            {
+              "id": "actions",
+              "title": "Bahagian 2: Perbuatan",
+              "tone": "cyan",
+              "items": [
+                { "id": "action-read", "arabic": "قَرَأَ", "meaning": "Membaca", "image": "assets/images/word-match/action-read.png", "audio": "assets/audio/word-match/action-read-ar.mp3" },
+                { "id": "action-play", "arabic": "لَعِبَ", "meaning": "Bermain", "image": "assets/images/word-match/action-play.png", "audio": "assets/audio/word-match/action-play-ar.mp3" },
+                { "id": "action-eat", "arabic": "أَكَلَ", "meaning": "Makan", "image": "assets/images/word-match/action-eat.png", "audio": "assets/audio/word-match/action-eat-ar.mp3" },
+                { "id": "action-sit", "arabic": "جَلَسَ", "meaning": "Duduk", "image": "assets/images/word-match/action-sit.png", "audio": "assets/audio/word-match/action-sit-ar.mp3" },
+                { "id": "action-drink", "arabic": "شَرِبَ", "meaning": "Minum", "image": "assets/images/word-match/action-drink.png", "audio": "assets/audio/word-match/action-drink-ar.mp3" },
+                { "id": "action-write", "arabic": "كَتَبَ", "meaning": "Menulis", "image": "assets/images/word-match/action-write.png", "audio": "assets/audio/word-match/action-write-ar.mp3" }
+              ]
+            },
+            {
+              "id": "animals",
+              "title": "Bahagian 3: Haiwan",
+              "tone": "green",
+              "items": [
+                { "id": "animal-cow", "arabic": "بَقَرَةٌ", "meaning": "Lembu", "image": "assets/images/word-match/animal-cow.png", "audio": "assets/audio/word-match/animal-cow-ar.mp3" },
+                { "id": "animal-elephant", "arabic": "فِيلٌ", "meaning": "Gajah", "image": "assets/images/word-match/animal-elephant.png", "audio": "assets/audio/word-match/animal-elephant-ar.mp3" },
+                { "id": "animal-fish", "arabic": "سَمَكٌ", "meaning": "Ikan", "image": "assets/images/word-match/animal-fish.png", "audio": "assets/audio/word-match/animal-fish-ar.mp3" },
+                { "id": "animal-cat", "arabic": "قِطٌّ", "meaning": "Kucing", "image": "assets/images/word-match/animal-cat.png", "audio": "assets/audio/word-match/animal-cat-ar.mp3" },
+                { "id": "animal-ants", "arabic": "نَمْلٌ", "meaning": "Semut", "image": "assets/images/word-match/animal-ants.png", "audio": "assets/audio/word-match/animal-ants-ar.mp3" },
+                { "id": "animal-rooster", "arabic": "دِيكٌ", "meaning": "Ayam jantan", "image": "assets/images/word-match/animal-rooster.png", "audio": "assets/audio/word-match/animal-rooster-ar.mp3" }
+          ]
+        }
+      ]
+    }
   ]
 }
