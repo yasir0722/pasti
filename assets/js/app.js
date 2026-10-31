@@ -717,8 +717,11 @@ function renderWordMatchCategory(category) {
         <div class="match-picture-list" role="group" aria-label="${escapeHtml(pictureLabel)} ${escapeHtml(category.title)}">
           ${category.pictures.map((item) => {
             const matched = Boolean(wordMatchSession.matches[item.id]);
+            const picture = item.emoji
+              ? `<span class="match-picture-emoji" aria-hidden="true">${escapeHtml(item.emoji)}</span>`
+              : `<img src="${escapeHtml(item.image)}" alt="" width="112" height="66" />`;
             return `<button class="match-picture${matched ? " is-matched" : ""}" type="button" data-category-id="${escapeHtml(category.id)}" data-match-target="${escapeHtml(item.id)}" aria-label="${escapeHtml(pictureLabel)}: ${escapeHtml(item.meaning)}"${matched ? " disabled" : ""}>
-              <span class="match-picture-dot" aria-hidden="true"></span><img src="${escapeHtml(item.image)}" alt="" width="112" height="66" />
+              <span class="match-picture-dot" aria-hidden="true"></span>${picture}
             </button>`;
           }).join("")}
         </div>

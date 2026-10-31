@@ -287,6 +287,32 @@
             ]
           }
         ]
+      },
+      {
+        "id": "english-word-picture",
+        "title": "Padankan Perkataan English",
+        "description": "Padankan 6 perkataan English dengan gambar yang betul.",
+        "subject": "English · Aktiviti padanan",
+        "instructions": "Padankan setiap perkataan dengan gambar yang betul. Pada telefon, sentuh perkataan kemudian sentuh gambarnya.",
+        "language": "en",
+        "wordLabel": "Perkataan",
+        "pictureLabel": "Gambar",
+        "largePictures": true,
+        "categories": [
+          {
+            "id": "english-words",
+            "title": "Padankan perkataan",
+            "tone": "cyan",
+            "items": [
+              { "id": "chair", "word": "chair", "meaning": "kerusi", "emoji": "🪑" },
+              { "id": "duck", "word": "duck", "meaning": "itik", "emoji": "🦆" },
+              { "id": "cup", "word": "cup", "meaning": "cawan", "emoji": "☕" },
+              { "id": "mango", "word": "mango", "meaning": "mangga", "emoji": "🥭" },
+              { "id": "nose", "word": "nose", "meaning": "hidung", "emoji": "👃" },
+              { "id": "door", "word": "door", "meaning": "pintu", "emoji": "🚪" }
+            ]
+          }
+        ]
       }
     ]
   }
