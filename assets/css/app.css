@@ -165,7 +165,6 @@ h2 { margin-bottom: 10px; font-size: clamp(1.7rem, 4vw, 2.7rem); letter-spacing:
 .match-category-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; gap: 12px; }
 .match-category-grid-single { grid-template-columns: minmax(0, 1fr); max-width: 760px; margin-inline: auto; }
 .match-category-grid-illustrated .match-picture img { width: min(100%, 150px); height: 78px; }
-.match-word-list { align-content: space-between; }
 .match-picture-emoji { display: grid; width: min(100%, 150px); height: 78px; place-items: center; font-size: 58px; line-height: 1; }
 .match-category { --match-accent: #e843ad; --match-wash: #fff7fc; position: relative; min-width: 0; overflow: hidden; padding: 10px; border: 3px solid var(--match-accent); border-radius: 18px; background: #fffdfd; }
 .match-category-cyan { --match-accent: #13c4df; --match-wash: #f3fcff; }
@@ -175,6 +174,7 @@ h2 { margin-bottom: 10px; font-size: clamp(1.7rem, 4vw, 2.7rem); letter-spacing:
 .match-board-stage { position: relative; }
 .match-columns { position: relative; z-index: 3; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px; }
 .match-word-list, .match-picture-list { display: grid; align-content: start; gap: 8px; min-width: 0; }
+.match-word-list { align-content: space-between; }
 .match-word, .match-picture { position: relative; display: flex; width: 100%; min-width: 0; min-height: 58px; align-items: center; justify-content: center; border: 2px dashed var(--match-accent); border-radius: 10px; background: var(--match-wash); cursor: pointer; }
 .match-word { justify-content: center; padding: 5px 10px; color: #111; font-family: Georgia, "Times New Roman", serif; font-size: clamp(20px, 2vw, 27px); line-height: 1.2; touch-action: manipulation; }
 .match-word.has-image { min-height: 88px; }
