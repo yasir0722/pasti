@@ -234,9 +234,59 @@
                 { "id": "animal-cat", "arabic": "قِطٌّ", "meaning": "Kucing", "image": "assets/images/word-match/animal-cat.png", "audio": "assets/audio/word-match/animal-cat-ar.mp3" },
                 { "id": "animal-ants", "arabic": "نَمْلٌ", "meaning": "Semut", "image": "assets/images/word-match/animal-ants.png", "audio": "assets/audio/word-match/animal-ants-ar.mp3" },
                 { "id": "animal-rooster", "arabic": "دِيكٌ", "meaning": "Ayam jantan", "image": "assets/images/word-match/animal-rooster.png", "audio": "assets/audio/word-match/animal-rooster-ar.mp3" }
+              ]
+            }
           ]
-        }
-      ]
-    }
-  ]
-}
+        },
+      {
+        "id": "animal-movement",
+        "title": "Haiwan dan Cara Pergerakannya",
+        "description": "Padankan 5 haiwan dengan cara pergerakannya.",
+        "subject": "Sains dan Teknologi · Aktiviti padanan",
+        "instructions": "Padankan cara pergerakan dengan haiwan yang betul. Pada telefon, sentuh perkataan kemudian sentuh gambarnya.",
+        "language": "ms",
+        "wordLabel": "Pergerakan",
+        "pictureLabel": "Haiwan",
+        "largePictures": true,
+        "categories": [
+          {
+            "id": "animal-movement",
+            "title": "Bahagian 1: Pergerakan Haiwan",
+            "tone": "cyan",
+            "items": [
+              { "id": "fish-swimming", "word": "Berenang", "meaning": "Ikan", "image": "assets/images/science/fish.png" },
+              { "id": "bird-flying", "word": "Terbang", "meaning": "Burung", "image": "assets/images/science/bird.png" },
+              { "id": "snake-slithering", "word": "Menjalar", "meaning": "Ular", "image": "assets/images/science/snake.png" },
+              { "id": "frog-jumping", "word": "Melompat", "meaning": "Katak", "image": "assets/images/science/frog.png" },
+              { "id": "horse-running", "word": "Berlari", "meaning": "Kuda", "image": "assets/images/science/horse.png" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "shape-object",
+        "title": "Bentuk dan Objek",
+        "description": "Padankan 5 bentuk dengan objek yang serupa.",
+        "subject": "Matematik · Aktiviti padanan",
+        "instructions": "Padankan bentuk dengan objek yang serupa. Pada telefon, sentuh nama bentuk kemudian sentuh gambarnya.",
+        "language": "ms",
+        "wordLabel": "Bentuk",
+        "pictureLabel": "Objek",
+        "largePictures": true,
+        "categories": [
+          {
+            "id": "shape-object",
+            "title": "Bahagian 1: Bentuk dan Objek",
+            "tone": "cyan",
+            "items": [
+              { "id": "shape-circle", "word": "Bulatan", "wordImage": "assets/images/shapes/shape-circle.png", "meaning": "Gelang renang", "image": "assets/images/shapes/object-float.png" },
+              { "id": "shape-triangle", "word": "Segi tiga", "wordImage": "assets/images/shapes/shape-triangle.png", "meaning": "Sandwic", "image": "assets/images/shapes/object-sandwich.png" },
+              { "id": "shape-rectangle", "word": "Segi empat tepat", "wordImage": "assets/images/shapes/shape-rectangle.png", "meaning": "Pintu", "image": "assets/images/shapes/object-door.png" },
+              { "id": "shape-star", "word": "Bintang", "wordImage": "assets/images/shapes/shape-star.png", "meaning": "Bintang", "image": "assets/images/shapes/object-star.png" },
+              { "id": "shape-square", "word": "Segi empat sama", "wordImage": "assets/images/shapes/shape-square.png", "meaning": "Kotak hadiah", "image": "assets/images/shapes/object-gift.png" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
